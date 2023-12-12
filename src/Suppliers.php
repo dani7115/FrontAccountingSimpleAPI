@@ -83,12 +83,27 @@ class Suppliers
             $info['notes'] = '';
         }
 
+        $dimension_id=0;
+        $dimension_id2=0;
+
+        if(isset($info['dimension_id']))
+            if(!is_numeric($info['dimension_id']))
+                api_error(412, 'Dimension 1 should be numeric value [dimension_id]');
+            else
+                $dimension_id=$info['dimension_id'];
+
+        if(isset($info['dimension_id2']))
+            if(!is_numeric($info['dimension_id2']))
+                api_error(412, 'Dimension 2 should be numeric value [dimension_id2]');
+            else
+                $dimension_id2=$info['dimension_id2'];
+
         /*
          * $supp_name, $supp_ref, $address, $supp_address, $gst_no, $website, $supp_account_no, $bank_account,
          * $credit_limit, $dimension_id, $dimension2_id, $curr_code, $payment_terms, $payable_account,
          * $purchase_account, $payment_discount_account, $notes, $tax_group_id, $tax_included
          */
-        add_supplier($info['supp_name'], $info['supp_ref'], $info['address'], $info['supp_address'], $info['gst_no'], $info['website'], $info['supp_account_no'], $info['bank_account'], $info['credit_limit'], 0, 0, $info['curr_code'], $info['payment_terms'], $info['payable_account'], $info['purchase_account'], $info['payment_discount_account'], $info['notes'], $info['tax_group_id'], $info['tax_included']);
+        add_supplier($info['supp_name'], $info['supp_ref'], $info['address'], $info['supp_address'], $info['gst_no'], $info['website'], $info['supp_account_no'], $info['bank_account'], $info['credit_limit'], $dimension_id, $dimension_id2, $info['curr_code'], $info['payment_terms'], $info['payable_account'], $info['purchase_account'], $info['payment_discount_account'], $info['notes'], $info['tax_group_id'], $info['tax_included']);
 
         $id = db_insert_id();
         $sup = get_supplier($id);
@@ -163,12 +178,27 @@ class Suppliers
             $info['notes'] = '';
         }
 
+        $dimension_id=0;
+        $dimension_id2=0;
+
+        if(isset($info['dimension_id']))
+            if(!is_numeric($info['dimension_id']))
+                api_error(412, 'Dimension 1 should be numeric value [dimension_id]');
+            else
+                $dimension_id=$info['dimension_id'];
+
+        if(isset($info['dimension_id2']))
+            if(!is_numeric($info['dimension_id2']))
+                api_error(412, 'Dimension 2 should be numeric value [dimension_id2]');
+            else
+                $dimension_id2=$info['dimension_id2'];
+
         /*
          * $supplier_id, $supp_name, $supp_ref, $address, $supp_address, $gst_no, $website, $supp_account_no,
          * $bank_account, $credit_limit, $dimension_id, $dimension2_id, $curr_code, $payment_terms, $payable_account,
          * $purchase_account, $payment_discount_account, $notes, $tax_group_id, $tax_included
          */
-        update_supplier($id, $info['supp_name'], $info['supp_ref'], $info['address'], $info['supp_address'], $info['gst_no'], $info['website'], $info['supp_account_no'], $info['bank_account'], $info['credit_limit'], 0, 0, $info['curr_code'], $info['payment_terms'], $info['payable_account'], $info['purchase_account'], $info['payment_discount_account'], $info['notes'], $info['tax_group_id'], $info['tax_included']);
+        update_supplier($id, $info['supp_name'], $info['supp_ref'], $info['address'], $info['supp_address'], $info['gst_no'], $info['website'], $info['supp_account_no'], $info['bank_account'], $info['credit_limit'], $dimension_id, $dimension_id2, $info['curr_code'], $info['payment_terms'], $info['payable_account'], $info['purchase_account'], $info['payment_discount_account'], $info['notes'], $info['tax_group_id'], $info['tax_included']);
 
         api_success_response("Supplier has been updated");
     }

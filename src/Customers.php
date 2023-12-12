@@ -107,11 +107,26 @@ class Customers
             $info['email'] = '';
         }
 
+        $dimension_id=0;
+        $dimension_id2=0;
+
+        if(isset($info['dimension_id']))
+            if(!is_numeric($info['dimension_id']))
+                api_error(412, 'Dimension 1 should be numeric value [dimension_id]');
+            else
+                $dimension_id=$info['dimension_id'];
+
+        if(isset($info['dimension_id2']))
+            if(!is_numeric($info['dimension_id2']))
+                api_error(412, 'Dimension 2 should be numeric value [dimension_id2]');
+            else
+                $dimension_id2=$info['dimension_id2'];
+
         /*
          * $CustName, $debtor_ref, $address, $tax_id, $curr_code, $dimension_id, $dimension2_id, $credit_status,
          * $payment_terms, $discount, $pymt_discount, $credit_limit, $sales_type, $notes
          */
-        add_customer($info['name'], $info['debtor_ref'], $info['address'], $info['tax_id'], $info['curr_code'], 0, 0, $info['credit_status'], $info['payment_terms'], $info['discount'], $info['pymt_discount'], $info['credit_limit'], $info['sales_type'], $info['notes']);
+        add_customer($info['name'], $info['debtor_ref'], $info['address'], $info['tax_id'], $info['curr_code'], $dimension_id, $dimension_id2, $info['credit_status'], $info['payment_terms'], $info['discount'], $info['pymt_discount'], $info['credit_limit'], $info['sales_type'], $info['notes']);
 
         $selected_id = db_insert_id();
         $auto_create_branch = 1;
@@ -137,6 +152,7 @@ class Customers
     }
     // Edit Specific Item
     public function put($rest, $id)
+
     {
         $req = $rest->request();
         $info = $req->post();
@@ -188,11 +204,26 @@ class Customers
             $info['notes'] = '';
         }
 
+        $dimension_id=0;
+        $dimension_id2=0;
+
+        if(isset($info['dimension_id']))
+            if(!is_numeric($info['dimension_id']))
+                api_error(412, 'Dimension 1 should be numeric value [dimension_id]');
+            else
+                $dimension_id=$info['dimension_id'];
+
+        if(isset($info['dimension_id2']))
+            if(!is_numeric($info['dimension_id2']))
+                api_error(412, 'Dimension 2 should be numeric value [dimension_id2]');
+            else
+                $dimension_id2=$info['dimension_id2'];
+
         /*
          * $customer_id, $CustName, $debtor_ref, $address, $tax_id, $curr_code, $dimension_id, $dimension2_id,
          * $credit_status, $payment_terms, $discount, $pymt_discount, $credit_limit, $sales_type, $notes
          */
-        update_customer($id, $info['name'], $info['debtor_ref'], $info['address'], $info['tax_id'], $info['curr_code'], 0, 0, $info['credit_status'], $info['payment_terms'], $info['discount'], $info['pymt_discount'], $info['credit_limit'], $info['sales_type'], $info['notes']);
+        update_customer($id, $info['name'], $info['debtor_ref'], $info['address'], $info['tax_id'], $info['curr_code'], $dimension_id, $dimension_id2, $info['credit_status'], $info['payment_terms'], $info['discount'], $info['pymt_discount'], $info['credit_limit'], $info['sales_type'], $info['notes']);
 
         api_success_response("Customer has been updated");
     }

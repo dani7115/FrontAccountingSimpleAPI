@@ -137,7 +137,8 @@ class Dimensions
         \api_validate('name', $model);
         \api_check('memo', $model);
         // add_dimension($reference, $name, $type_, $date_, $due_date, $memo_)
-        $id = add_dimension($model['reference'], $model['name'], '', '', '', $model['memo']);
+       // $id = add_dimension($model['reference'], $model['name'], '', '', '', $model['memo']);
+        $id = add_dimension($model['reference'], $model['name'], $model['type_'],$model['date_'],$model['due_date'], $model['memo']);
         \api_create_response(array('id' => $id));
     }
 

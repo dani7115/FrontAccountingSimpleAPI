@@ -262,7 +262,15 @@ class Journal
         $cart->reference = $model['reference'] ? $model['reference'] : $Refs->get_next(ST_JOURNAL, null, $cart->tran_date);
         // TODO check fiscal year
         foreach ($model['items'] as $item) {
-            $cart->add_gl_item($item['account_code'], '', '', $item['amount'], $item['memo']);
+
+            /* Added by Danish Start*/
+            $dimension_id=(isset($item['dimension_id'])?$item['dimension_id']:'');
+            $dimension2_id=(isset($item['dimension2_id'])?$item['dimension2_id']:'');
+            $person_id=(isset($item['person_id'])?$item['person_id']:'');
+            $cart->add_gl_item($item['account_code'], $dimension_id, $dimension2_id, $item['amount'], $item['memo'],'',$person_id);
+            /* Added by Danish end*/
+
+           // $cart->add_gl_item($item['account_code'], '', '', $item['amount'], $item['memo']);
         }
 
         $id = write_journal_entries($cart);

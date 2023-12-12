@@ -89,7 +89,7 @@ class Sales
      *         description="successful operation",
      *         @SWG\Schema(
      *             type="object",
-     *             ref="#/definitions/Sale"
+     *             ref="#Ω/definitions/Sale"
      *         )
      *     ),
      *     deprecated=false
