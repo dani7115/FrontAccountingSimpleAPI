@@ -133,6 +133,12 @@ function can_commit()
     return true;
 }
 
+
+
+/**
+ * Author : Danish Naseem
+ * <dani.115115@gmail.com>
+ */
 function purchase_delete($branch_id,$uuid){
     $resp=['status'=>true,'msg'=>''];
     try {
@@ -170,6 +176,11 @@ function purchase_delete($branch_id,$uuid){
 
 }
 
+
+/**
+ * Author : Danish Naseem
+ * <dani.115115@gmail.com>
+ */
 function check_valid_entries()
 {
     if (is_closed_trans($_POST['filterType'],$_POST['trans_no']))

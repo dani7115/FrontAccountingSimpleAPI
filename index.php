@@ -42,6 +42,19 @@ Free software under GNU GPL
  * )
  */
 
+function c_log($log){
+    //  $file='../../tmp/logs.log';
+    $file='logs.log';
+    $myfile = fopen($file, file_exists($file)?'a':'w') or die("Unable to open file!");
+    fwrite($myfile,"\n".date('Y-m-d H:i:s').' : '. (is_array($log)?print_r($log,true):$log));
+    fclose($myfile);
+}
+
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 ini_set('html_errors', false);
 ini_set('xdebug.show_exception_trace', 0);
 // ini_set('xdebug.auto_trace', 2);

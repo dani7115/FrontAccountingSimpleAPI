@@ -7,6 +7,7 @@ Free software under GNU GPL
 
 $path_to_root = "../..";
 
+include_once("custom_sales_includes/extended_cart_class.inc");   // by husnain
 include_once($path_to_root . "/sales/includes/cart_class.inc");
 include_once($path_to_root . "/includes/date_functions.inc");
 include_once($path_to_root . "/sales/includes/sales_ui.inc");
@@ -251,8 +252,13 @@ function sales_add() {
 	$req	= $app->request();
 	$info	= $req->post();
 
+	c_log('in sales step 1');
+
 	$cart									= null;
-	$cart									= new Cart($info['trans_type'], 0);
+	//$cart									= new Cart($info['trans_type'], 0);    // commented by husnain 12-dec-2023 to use extended class
+    $cart = new ExtendedCart($info['trans_type'], 0); // by husnain 12-dec-2023 extended cart class to give priority to item sales account if 'use_item_sale_account' param exist else use orginal
+
+
 	$cart->reference			= $info['ref'];
 	$cart->Comments				= $info['comments'];
 	$cart->document_date	= $info['order_date'];
@@ -296,6 +302,10 @@ function sales_add() {
 		$cart->dimension_id		= $info['dimension_id'];
 		$cart->dimension2_id	= $info['dimension2_id'];
 	}
+
+    if(isset($info['use_item_sale_account'])){                        // 12-dec-2023 by husnain if want to give priority to use item sale account
+        $cart->use_item_sale_account=$info['use_item_sale_account'];
+    }
 
 	foreach($info['items'] as $item) {
 		add_to_order($cart, $item['stock_id'], $item['qty'], $item['price'], $item['discount'], $item['description']);

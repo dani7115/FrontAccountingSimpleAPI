@@ -5,6 +5,8 @@
 
 namespace FAAPI;
 
+
+
 class CustomerPayments
 {
     public function post($rest)
@@ -17,5 +19,23 @@ class CustomerPayments
     {
         include_once(API_ROOT . "/customerPayments.inc");
         customerPayments_delete();
+    }
+
+    public function getAvailableCustomerPayments($rest)
+    {
+        include_once(API_ROOT . "/customerPayments.inc");
+        getAvailableCustomerPayments();
+    }
+
+    public function getCustomerSalesForAllocate($rest)
+    {
+        include_once(API_ROOT . "/customerPayments.inc");
+        getCustomerSalesForAllocate();
+    }
+
+    public function allocateCustomerPayments($rest)
+    {
+        include_once(API_ROOT . "/customerPayments.inc");
+        customerPayments_allocate();
     }
 }
